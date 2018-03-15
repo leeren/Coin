@@ -1,6 +1,6 @@
 contracts/.placeholder
 test/.placeholder
-build
+build/contracts
 node_modules
 package-lock.json
 geth.log
