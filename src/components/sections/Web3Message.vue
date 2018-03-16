@@ -17,9 +17,6 @@
                 You're all set to use the dApp. If you're not signed up, click the "Sign Up" link above to begin, or click the LOGIN button above to login.
               </span>
             </div>
-            <div v-else>
-              But it seems you don't have an account with us on the blockchain.<br>Or you do but the account is currently inaccessible.<br>Create an account on the blockchain and sign up to begin, or make your existing account accessible.
-            </div>
           </div>
           <div v-else>
             But you are not connected to our network on the blockchain [{{ approvedNetworkName }}].<br>
