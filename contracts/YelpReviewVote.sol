@@ -12,7 +12,7 @@ contract YelpReviewVote{
         address[] users;
     }
 
-    mapping (uint256 => uint256) totalVotes;
+    mapping (uint256 => uint256) public totalVotes;
     mapping (address => mapping (uint256 => uint256)) reviewVotingByUser;
     mapping (uint256 => Voters) reviewVotingByReviewId;
 
