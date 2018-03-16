@@ -18,7 +18,7 @@ contract YelpReviewVote{
     uint reward;
     token public yelpCoinReward;
     uint invalid = uint(-1);
-    uint valid = uint(-1);
+    uint valid = uint(1);
 
     function YelpReviewVote(
         address addressOfYelpCoin,
