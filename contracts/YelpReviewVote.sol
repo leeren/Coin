@@ -1,22 +1,21 @@
 pragma solidity ^0.4.19;
 
-interface token {
-    function transfer(address receiver, uint amount) public ;
+interface Token {
+    function transfer(address receiver, uint256 amount) public ;
+    function mintToken(address target, uint256 _value) public;
+    function burn(uint256 _value) public returns (bool success);
+    function burnFrom(address _from, uint256 _value) public returns (bool success);
 }
 
-contract YelpReviewVote{
-
-    struct Voters {
-        address[] users;
-    }
-
+contract YelpReviewVote {
 
     mapping (uint => uint) public totalVotes;
-    mapping (address => mapping(uint => uint)) reviewVotingByUser;
-    mapping (uint => Voters) reviewVotingByReviewId;
+    mapping (address => mapping(uint => uint)) public reviewVotingByUser;
+    // mapping (address => uint) public reviewVotingByUser;
+    // mapping (uint => address[]) public reviewVotingByReviewId;
     uint minVoteLimit;
     uint reward;
-    token public yelpCoinReward;
+    Token public yelpCoinReward;
     uint invalid = uint(-1);
     uint valid = uint(1);
 
@@ -25,9 +24,13 @@ contract YelpReviewVote{
         uint voteLimit,
         uint rewardToPay
     ) public {
-        yelpCoinReward = token(addressOfYelpCoin);
+        yelpCoinReward = Token(addressOfYelpCoin);
         minVoteLimit = voteLimit;
         reward = rewardToPay;
+    }
+
+    function getVoteForUser (uint _reviewId) public returns(uint)  {
+        return reviewVotingByUser[msg.sender][_reviewId];
     }
 
     function vote(uint _reviewId, uint _value) public {
@@ -35,30 +38,30 @@ contract YelpReviewVote{
         address sender = msg.sender;
         totalVotes[_reviewId] += 1;
         reviewVotingByUser[sender][_reviewId] = _value;
-
-        if (totalVotes[_reviewId] >= minVoteLimit) {
-             _aggregate(_reviewId);
-        }
-
+        yelpCoinReward.transfer(sender, reward);
+        // reviewVotingByReviewId[_reviewId] += 1;
+        // if (totalVotes[_reviewId] >= minVoteLimit) {
+        //      _aggregate(_reviewId);
+        // }
     }
 
-    function _aggregate (uint _reviewId) internal returns (uint)  {
-        uint finalValue = 0;
-        address[] storage votes = reviewVotingByReviewId[_reviewId].users;
-        for (uint i =0; i < votes.length; i++) {
-            finalValue += reviewVotingByUser[votes[i]][_reviewId];
-        }
-        _sendReward(_reviewId, finalValue);
-    }
+    // function _aggregate (uint _reviewId) internal returns (uint)  {
+    //     uint finalValue = 0;
+    //     address[] storage votes = reviewVotingByReviewId[_reviewId];
+    //     for (uint i =0; i < votes.length; i++) {
+    //         finalValue += reviewVotingByUser[votes[i]][_reviewId];
+    //     }
+    //     _sendReward(_reviewId, finalValue);
+    // }
 
-    function _sendReward (uint _reviewId, uint finalValue) internal {
-        address[] storage votes = reviewVotingByReviewId[_reviewId].users;
-        for (uint i =0; i < votes.length; i++) {
-            if (reviewVotingByUser[votes[i]][_reviewId] == finalValue) {
-                yelpCoinReward.transfer(votes[i], reward);
-            }
-        }
-    }
+    // function _sendReward (uint _reviewId, uint finalValue) internal {
+    //     address[] storage votes = reviewVotingByReviewId[_reviewId];
+    //     for (uint i =0; i < votes.length; i++) {
+    //         if (reviewVotingByUser[votes[i]][_reviewId] == finalValue) {
+    //             yelpCoinReward.transfer(votes[i], reward);
+    //         }
+    //     }
+    // }
 
 
 }
