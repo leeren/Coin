@@ -21,7 +21,7 @@ contract YelpCoin is Ownable, Destructible {
         string tokenName,
         string tokenSymbol
     ) {
-        totalSupply = initialSupply * 10 ** uint256(decimals);
+        totalSupply = initialSupply;
         balanceOf[msg.sender] = totalSupply;
         name = tokenName;
         symbol = tokenSymbol;
