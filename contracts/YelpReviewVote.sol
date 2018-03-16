@@ -12,7 +12,7 @@ contract YelpReviewVote{
         address[] users;
     }
 
-    mapping (uint256 => uint256) totalVotes;
+    mapping (uint256 => uint256) public totalVotes;
     mapping (address => mapping (uint256 => uint256)) reviewVotingByUser;
     mapping (uint256 => Voters) reviewVotingByReviewId;
 
@@ -33,6 +33,7 @@ contract YelpReviewVote{
     function vote(uint256 _reviewId, uint256 _value) public {
         // If the user has not voted
         address sender = msg.sender;
+        totalVotes[_reviewId] = totalVotes[_reviewId] + 1;
         if (reviewVotingByUser[sender][_reviewId] == 0 && totalVotes[_reviewId] < minVoteLimit) {
             totalVotes[_reviewId] = totalVotes[_reviewId] + 1;
             reviewVotingByUser[sender][_reviewId] = _value;
