@@ -1,11 +1,12 @@
 <template v-if="isLoggedIn">
   <div id="dashboard">
-    <HeaderTemplate
+    <HeaderTemplate :user="user"
       @log-user-in="logUserIn"
       @log-user-out="logUserOut"
     />
     <BodyTemplate
       :current-view="currentView"
+      :user="user"
     />
     <FooterTemplate />
   </div>

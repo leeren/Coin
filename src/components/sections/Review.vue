@@ -35,6 +35,7 @@
 
 <script type="text/javascript">
   import Web3 from 'web3'
+  var web3 = window.web3
   export default {
     props: ['review'],
     data () {
@@ -54,6 +55,7 @@
     },
     methods: {
       showForm () {
+        console.log('FUCK')
         this.isEditing = true
       },
       hideForm () {
@@ -67,6 +69,7 @@
           this.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545')
           web3 = new Web3(this.web3Provider)
         }
+        console.log('shit')
         this.getContract()
       },
       getContract () {
@@ -84,7 +87,7 @@
             return
           }
           switch (netId) {
-            case '26':
+            case '8777679':
               console.log('THIS IS YELPCOIN')
               break
             default:

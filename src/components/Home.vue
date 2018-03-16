@@ -1,9 +1,5 @@
 <template>
   <div id="home">
-    <HeaderTemplate
-      @log-user-in="logUserIn"
-      @log-user-out="logUserOut"
-    />
     <div class='ui three column centered grid'>
         <div class='column'>
             <review-list v-bind:reviews="reviews"></review-list>
@@ -11,15 +7,15 @@
     </div>
     <BodyTemplate
       :current-view="currentView"
+      :user="user"
     />
-    <FooterTemplate />
   </div>
 </template>
 
 <script>
   export default {
     name: 'home',
-    props: ['currentView'],
+    props: ['currentView', 'user'],
     methods: {
       logUserIn (evt) {
         this.$emit('log-user-in', evt)
@@ -34,15 +30,15 @@
       FooterTemplate,
       ReviewList
     },
-    data () { 
+    data () {
       return {
         reviews: [{
-          title: 'Review A',
-          comment: 'I love eating at A!',
+          title: 'Native Twins Coffee',
+          comment: 'Starbucks is much better. I recommend going to STARBUCKS. Do not go here.',
           verified: false
         }, {
-          title: 'Review B',
-          comment: 'B sucks!',
+          title: 'The Board',
+          comment: 'Best brunch in town. Highly reccommend!',
           verified: false
         }, {
           title: 'Review C',

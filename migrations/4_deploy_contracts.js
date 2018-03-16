@@ -1,8 +1,7 @@
 var YelpCoin = artifacts.require("./YelpCoin.sol");
-var YelpReviewVote = artifacts.require("./YelpReviewVote");
+var Reputation = artifacts.require("./Reputation.sol");
 
 module.exports = function (deployer) {
-	deployer.deploy(YelpCoin, 100, "YelpCoin", "Y").then(()=>{
-		deployer.deploy(YelpReviewVote, YelpCoin.address, 1, 10);
-	})
+	deployer.deploy(YelpCoin, 100, "YelpCoin", "Y");
+	deployer.deploy(Reputation);
 };
