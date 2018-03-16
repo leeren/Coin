@@ -3,8 +3,14 @@ pragma solidity ^0.4.19;
 import "./zeppelin/ownership/Ownable.sol";
 import "./zeppelin/lifecycle/Destructible.sol";
 
+interface Token {
+    function transfer(address receiver, uint256 amount) public ;
+    function mintToken(address target, uint256 _value) public;
+    function burn(uint256 _value) public returns (bool success);
+    function burnFrom(address _from, uint256 _value) public returns (bool success);
+}
 
-contract YelpCoin is Ownable, Destructible {
+contract YelpCoin is Ownable, Destructible, Token {
     string public name;
     string public symbol;
     uint8 public decimals = 18;
@@ -54,7 +60,7 @@ contract YelpCoin is Ownable, Destructible {
     function burn(uint256 _value) onlyOwner public returns (bool success) {
         require(balanceOf[msg.sender] >= _value);
         balanceOf[msg.sender] -= _value;
-        totalSupply -= _value;        
+        totalSupply -= _value;
         Burn(msg.sender, _value);
         return true;
     }
@@ -67,3 +73,5 @@ contract YelpCoin is Ownable, Destructible {
         return true;
     }
 }
+
+
