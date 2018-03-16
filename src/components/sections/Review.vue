@@ -73,12 +73,14 @@
         this.getContract()
       },
       getContract () {
-        var YelpCoinArtifact = require('../../../build/contracts/YelpCoin.json')
-        this.contracts.YelpCoin = this.$TruffleContract(YelpCoinArtifact)
-        console.log(this.contracts.YelpCoin)
-        this.contracts.YelpCoin.setProvider(this.web3Provider)
-        this.networkCheck()
-        this.getBalances()
+        const artifacts = require('../../../build/contracts/YelpCoin.json')
+        const contract = require('truffle-contract')
+        let YelpCoinContract = contract(artifacts)
+        console.log('suhh')
+        YelpCoinContract.setProvider(this.web3Provider)
+        return YelpCoinContract.deployed().then(function (instance) {
+          console.log(instance.totalSupply())
+        })
       },
       networkCheck () {
         web3.version.getNetwork((err, netId) => {
