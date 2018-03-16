@@ -1,12 +1,12 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.19;
 
 interface YelpCoin {
-    function transfer(address receiver, uint256 amount);
-    function burn(uint256 amount);
-    function burnFrom(address sender, uint256 amount);
+    function transfer(address receiver, uint256 amount) public ;
+    function burn(uint256 amount) public;
+    function burnFrom(address sender, uint256 amount) public;
 }
 
-contract YelpReviewsVote{
+contract YelpReviewVote{
 
     struct Voters {
         address[] users;
@@ -20,7 +20,7 @@ contract YelpReviewsVote{
     uint256 reward;
     YelpCoin public yelpCoinReward;
 
-    function YelpReviewsVote(
+    function YelpReviewVote(
         address addressOfYelpCoin,
         uint256 voteLimit,
         uint256 rewardToPay
