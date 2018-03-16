@@ -40,8 +40,6 @@ contract YelpReviewVote{
             if (totalVotes[_reviewId] >= minVoteLimit) {
                 _aggregate(_reviewId);
             }
-        } else {
-            revert();
         }
     }
 
