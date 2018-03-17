@@ -3,7 +3,6 @@
     <div class="content" v-show="!isEditing">
       <div class='header'>
           {{ review.title }}
-          {{ balance }}
       </div>
       <div class='meta'>
           {{ review.comment }}

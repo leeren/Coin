@@ -48,30 +48,24 @@ export default {
         web3 = new Web3(this.web3Provider)
       }
       console.log('shit')
-      this.getContract()
     },
     getTotalSupply () {
+      var self = this
       const artifacts = require('../../../build/contracts/YelpCoin.json')
       const contract = require('truffle-contract')
       var YelpCoinContract = contract(artifacts)
       YelpCoinContract.setProvider(this.web3Provider)
-      YelpCoinContract.deployed().then(function (instance) {
-        var totalSupply = instance.totalSupply()
-        console.log('fuck')
-        console.log(totalSupply)
-        console.log(totalSupply.c)
-        console.log(totalSupply.c[0])
-        return totalSupply.c[0]
+      var supply = YelpCoinContract.deployed().then(function (instance) {
+        var totalSupply = instance.totalSupply().then(function (stuff) {
+          self.circulating = stuff.c[0]
+        })
+        return totalSupply
       })
+      console.log('e')
+      console.log(supply)
     },
-    getContract: function () {
-      const artifacts = require('../../../build/contracts/YelpCoin.json')
-      const contract = require('truffle-contract')
-      var YelpCoinContract = contract(artifacts)
-      YelpCoinContract.setProvider(this.web3Provider)
-      YelpCoinContract.deployed().then(function (instance) {
-        return instance
-      })
+    setSupply (supply) {
+      this.circulating = supply
     },
     networkCheck () {
       web3.version.getNetwork((err, netId) => {
