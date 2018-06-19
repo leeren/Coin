@@ -1,5 +1,5 @@
 # YELPCOIN README
-Author of this instructional guide: Leeren Chang (~leeren)
+Author: Leeren Chang
 
 ## INSTALLATION AND REQUIREMENTS
 
@@ -32,10 +32,10 @@ With this, Geth can via node-discovery RPC protocol connect to the YelpCoin netw
   - `config.eip155Block`: Defaults to 0 meaning we do not hard-fork from the initial proposal described by this EIP.
   - `config.eip158Block`: Defaults to 0 meaning we do not hard-fork from the initial proposal described by this EIP.
   - `coinbase`: 160-bit default address where mining reward gets credited to.
-  - `difficulty`: `nonce` difficulty level used when mining. The higher this is the longer blocks take to be generated.
+  - `difficulty`: Difficulty level used when mining. The higher this is the longer blocks take to be generated.
   - `extraData`: Optional field to store extra stuff.
-  - `gasLimit`: Tx cost = gasPrice x gasLimit. gasLimit = max transaction expenditure. 21000 is the standard.
-  - `nonce": 64-bit hash combined with "mixhash` to be used for PoW calculations. For genesis.json this just helps make file unique.
+  - `gasLimit`: Tx cost = `gasPrice` x `gasLimit`. `gasLimit` = max transaction expenditure. 21000 is the standard.
+  - `nonce`: 64-bit hash combined with `mixhash` to be used for PoW calculations. For genesis.json this just helps make file unique.
   - `mixhash`: 256-bit hash that is used for PoW validation as mentioned above. For genesis.json this just helps make file unique.
   - `timestamp`: Time of creation of the genesis block (which is what genesis.json settings describe).
   - `alloc`: Here we pre-allocate a certain about of ethereum to a given address for testing purposes.
